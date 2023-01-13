@@ -2,15 +2,17 @@ package service
 
 import (
 	"context"
-	"go_technology_stack/demos/hello_grpc/pb"
+	hellopb "go_technology_stack/demos/hello_grpc/pb"
 )
 
 // HelloServer TODO
 type HelloServer struct {
-	pb.UnimplementedHelloServer
+	hellopb.UnimplementedHelloServer
 }
 
 // SayHello TODO
-func (s *HelloServer) SayHello(ctx context.Context, in *pb.SayHelloReq) (out *pb.SayHelloResp, err error) {
-	return &pb.SayHelloResp{Message: "Hello, Grpc!"}, nil
+func (s *HelloServer) SayHello(
+	ctx context.Context, in *hellopb.SayHelloReq,
+) (out *hellopb.SayHelloResp, err error) {
+	return &hellopb.SayHelloResp{Message: "Hello, Grpc!"}, nil
 }
