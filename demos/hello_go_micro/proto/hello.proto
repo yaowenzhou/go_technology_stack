@@ -1,0 +1,21 @@
+// 指明proto版本
+syntax="proto3";
+
+// ; 左边的内容是生成的hello.pb.go和hello_grpc.pb.go的目录
+// 这个目录可以在命令中通过 --go_out=../pb 和 --go-grpc_out=../pb重新指定
+// ; 右边是生成的hello.pb.go和hello_grpc.pb.go的包名
+option go_package = "../pb;hellopb"; 
+
+// proto的包名,一个文件就是一个package,用于其他proto文件import此文件时解析
+package hello;
+
+service Hello { // 服务名称
+  // 接口名称
+  rpc SayHello(SayHelloReq) returns (SayHelloResp); 
+}
+
+message SayHelloReq {} // 结构体定义
+message SayHelloResp {
+  string message = 1; // 1是序号，并不是赋值
+  string ext = 2; // 2也是序号，如果有更多属性，请递增
+}
