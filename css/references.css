@@ -1,0 +1,74 @@
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+.markdown-preview.markdown-preview {
+    font-family: 'Courier New', Courier, monospace, 'Microsoft YaHei';
+
+    /* prince设置参数 */
+    &.prince {
+
+        /* 添加页码 */
+        @page {
+            @bottom {
+                font-family: 'Courier New', Courier, monospace, 'Microsoft YaHei';
+                content: counter(page) " / " counter(pages)
+            }
+        }
+    }
+
+    blockquote {
+        padding: auto;
+        line-height: 22px;
+        border-radius: 5px;
+        display: block;
+        border-color: #78c578;
+        background-color: #e6f9e6;
+        padding-left: 1em;
+        margin-bottom: 0.8em;
+    }
+
+    blockquote p {
+        padding-left: 3px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 85%;
+        color: #000;
+    }
+
+    blockquote code {
+        background-color: transparent;
+        font-weight: bold;
+        color: #f56c6c
+    }
+
+    blockquote.warn {
+        background: rgba(230, 162, 60, .1);
+        border-color: #e6a23c;
+        padding-left: 3px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 85%;
+        color: #000;
+        padding-left: 1em;
+    }
+
+    blockquote.danger {
+        background: hsla(0, 87%, 69%, .1);
+        border-color: #f56c6c;
+        padding-left: 3px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        font-size: 85%;
+        color: #000;
+        padding-left: 1em;
+    }
+
+    p>code {
+        background-color: inherit;
+        color: #f56c6c;
+    }
+
+    ol code {
+        color: #f56c6c;
+    }
+}
