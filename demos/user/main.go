@@ -4,6 +4,7 @@ import (
 	"go_technology_stack/demos/user/handler"
 	pb "go_technology_stack/demos/user/proto"
 
+	"github.com/go-micro/plugins/v4/server/grpc"
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/logger"
 )
@@ -17,6 +18,7 @@ func main() {
 	// Create service
 	srv := micro.NewService()
 	srv.Init(
+		micro.Server(grpc.NewServer()),
 		micro.Name(service),
 		micro.Version(version),
 		micro.Address("192.168.1.99:9091"),
