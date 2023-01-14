@@ -182,3 +182,23 @@ contentN|contentN|contentN
     .inlineCodeStyle() // 使用样式函数
   }
 ```
+
+## 12. 修改代码块颜色
+![修改代码块颜色](./images/修改代码块颜色.png)
+
+## 13. 保持预览和导出的style相同
+![保持导出和预览时风格一致](./images/保持导出和预览时风格一致.png)
+
+## 14. 修改普通代码块style(没有指定语言)
+我们希望对于普通代码块(没有指定语言的那种)，其风格和语言代码块风格不同，因为我选的黑色背景不利于普通代码块的阅读，所以需要修改一下。
+`Ctrl+Shift+P`，打开`Markdown Preview Enhanced: Customize CSS`，并增加如下代码，css配置成什么样的可以自己发挥。
+下面的图三个箭头依次告诉你怎么打开这个文件，怎么修改，以及修改后的效果。
+```less
+  .language- {
+    background-color: #e6f9e6 !important;
+    code {
+      background-color: #e6f9e6 !important;
+    }
+  }
+```
+![修改普通代码块的颜色](./images/修改普通代码块的颜色.png)
