@@ -184,7 +184,7 @@ contentN|contentN|contentN
 ```
 
 ## 12. 修改代码块颜色
-![修改代码块颜色](./images/修改代码块颜色.png)
+![修改代码块style](./images/修改代码块style.png)
 
 ## 13. 保持预览和导出的style相同
 ![保持导出和预览时风格一致](./images/保持导出和预览时风格一致.png)
