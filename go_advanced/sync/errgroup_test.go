@@ -27,7 +27,6 @@ func fakeSearch(kind string) Search {
 func TestErrGroup(t *testing.T) {
 	Google := func(ctx context.Context, query string) ([]Result, error) {
 		g, ctx := errgroup.WithContext(ctx)
-
 		searches := []Search{Web, Image, Video}
 		results := make([]Result, len(searches))
 		for i, search := range searches {
