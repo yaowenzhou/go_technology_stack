@@ -198,3 +198,12 @@ func TestAtomicValue(t *testing.T) {
 	wg.Wait()
 }
 ```
+
+### 1.7 使用ErrGroup同时请求多条数据
+[ErrGroup的官方demo](./sync/errgroup_test.go)
+[ErrGroup的官方文档连接](https://pkg.go.dev/golang.org/x/sync/errgroup)
+
+### 1.8 once.Do进行线程安全的初始化
+once.Do可以提供init函数一样的初始化功能，但是init函数会在程序已开始执行的时候就加载，当变量很久都没使用到时，会造成内存浪费。once.Do可以保证代码只执行一次，配合闭包即可完成初始化。
+但是说实话，还不如用init，once.Do涉及到加锁的操作，假如后面要频繁读取这个配置，会影响到程序性能，总的来说感觉可有可无。
+[once.Do的demo](./sync/once_do_test.go)
