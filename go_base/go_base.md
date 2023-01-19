@@ -32,3 +32,7 @@ func TestTimeFormat(t *testing.T) {
 	fmt.Println(now.Format("2006-01-02 15:04:05.000000000")) // 精确到纳秒
 }
 ```
+
+## 3. 空的select语句将永远阻塞
+
+## 4. os.Exit 会直接让程序退出，不会执行defer

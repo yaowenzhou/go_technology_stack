@@ -70,3 +70,86 @@ func TestError(t *testing.T) {
 	myErrorTest()
 }
 ```
+
+### 1.3 后台执行应该交给调用者
+
+### 1.4 使用WaitGroup等待所有goroutine返回
+[WaitGroup的Demo](./sync/waitgroup_test.go)
+
+```go
+func TestWaitgroup(t *testing.T) {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		fmt.Println("go1 in...")
+		time.Sleep(time.Second * 5)
+		fmt.Println("go1 out...")
+		wg.Done()
+	}()
+	go func() {
+		fmt.Println("go2 in...")
+		time.Sleep(time.Second * 5)
+		fmt.Println("go2 out...")
+		wg.Done()
+	}()
+	wg.Wait()
+}
+```
+
+### 1.5 读写锁
+[读写锁demo代码](./sync/rwmutext_test.go)
+读写锁上写锁时，所有上锁操作都将被阻塞。
+读写锁上杜锁时，上写锁操作会被阻塞，但是上读锁的操作不会。
+特别的，当一个读写锁已经被上了读锁，但是有一个写锁在阻塞中(尝试上锁)时，后续所有的读锁都会被阻塞
+所以下面的代码极大概率会出现这种打印:
+```
+// go4: getReadLock...
+// go4: releaseReadLock...
+// go1: getWriteLock...
+// go1: releaseWriteLock...
+// go3: getReadLock...
+// go2: getReadLock...
+// go2: releaseReadLock...
+// go3: releaseReadLock...
+```
+
+```go
+func TestRWMutex(t *testing.T) {
+	var wg sync.WaitGroup
+	var rwMutex sync.RWMutex
+	wg.Add(4)
+	go func() {
+		rwMutex.Lock()
+		fmt.Println("go1: getWriteLock...")
+		time.Sleep(time.Second * 5)
+		fmt.Println("go1: releaseWriteLock...")
+		rwMutex.Unlock()
+		wg.Done()
+	}()
+	go func() {
+		rwMutex.RLock()
+		fmt.Println("go2: getReadLock...")
+		time.Sleep(time.Second * 5)
+		fmt.Println("go2: releaseReadLock...")
+		rwMutex.RUnlock()
+		wg.Done()
+	}()
+	go func() {
+		rwMutex.RLock()
+		fmt.Println("go3: getReadLock...")
+		time.Sleep(time.Second * 5)
+		fmt.Println("go3: releaseReadLock...")
+		rwMutex.RUnlock()
+		wg.Done()
+	}()
+	go func() {
+		rwMutex.RLock()
+		fmt.Println("go4: getReadLock...")
+		time.Sleep(time.Second * 5)
+		fmt.Println("go4: releaseReadLock...")
+		rwMutex.RUnlock()
+		wg.Done()
+	}()
+	wg.Wait()
+}
+```
